@@ -1,14 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <head>
     <title>Testing</title>
 </head>
 <body>
-    <form method="GET">
-        <label for="uploader">Requestor: </label>
-        <input type="text"><br><br>
-        <label for="testFile">File: </label>
-        <input type="file"><br><br>
-        <input type="submit" value="Submit">
-    </form>
+    <div>
+        <form method="POST">
+            {% csrf_token %}  
+            <label for="testFile">File: </label>
+            <input type="file"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 </html>
