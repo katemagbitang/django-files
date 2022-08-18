@@ -1,4 +1,7 @@
 from django.http import HttpResponse
+from django.shortcuts import render
+
+from .models import testModel
 
 def index(request):
-    return HttpResponse("<h1>Index Page</h1>")
+    return render(request,'index.html')
