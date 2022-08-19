@@ -5,18 +5,15 @@ from .models import testModel
 from .forms import UploadFileForm
 
 def index(request):
-    if request.method == 'POST':
-        filled_form = UploadFileForm(request.POST)
-        if filled_form.is_valid():
-            note = 'Uploaded'
-            new_form = UploadFileForm()
-            return render(request,'index.html', {'uploadform':new_form, 'note':note})    
-    else:
-        form = UploadFileForm()
-        return render(request,'index.html', {'uploadform':form})   
+    # if request.method == 'POST':
+    #     filled_form = UploadFileForm(request.POST)
+    #     if filled_form.is_valid():
+    #         note = 'Uploaded'
+    #         new_form = UploadFileForm()
+    #         return render(request,'index.html', {'uploadform':new_form, 'note':note})    
+    # else:
+    #     form = UploadFileForm()
+    #     return render(request,'index.html', {'uploadform':form})
 
-def upload(request):
-    testFiles = testModel.objects.all()
-    return render(request,'uploaded.html', {
-        'testFiles' : testFiles
-    })
+    form = UploadFileForm()
+    return render(request,'index.html', {'uploadform':form})   

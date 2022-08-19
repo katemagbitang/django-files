@@ -23,7 +23,6 @@ from testapp_1 import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
-    path('uploaded', views.upload, name='uploaded')
 ]
 
 if settings.DEBUG:
