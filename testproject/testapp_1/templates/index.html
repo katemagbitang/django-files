@@ -5,16 +5,16 @@
 </head>
 <body>
     <div>
-        <form method="POST">
+        <h3>{{ note }}</h3>
+        <form enctype="multipart/form-data" action="{% url 'index' %}" method="post">
             {% csrf_token %}  
-            <label for="testFile">File: </label>
-            <input type="file"><br><br>
-            <input type="submit" value="Submit">
+            {{ uploadform }}
+            <input id="submit" type="submit" value="Submit">
         </form>
     </div>
-    <div>
+    <!-- <div>
         {% block content %}
         {% endblock %}
-    </div>
+    </div> -->
 </body>
 </html>
