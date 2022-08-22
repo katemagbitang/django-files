@@ -23,6 +23,7 @@ from testapp_1 import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
+    path('files/', views.filesList, name="files"),
 ]
 
 if settings.DEBUG:

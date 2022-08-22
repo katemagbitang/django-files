@@ -3,14 +3,13 @@ from django.shortcuts import render
 
 from .models import testModel
 from .forms import UploadFileForm
-from .functions import handle_uploaded_file
 
 def index(request):
     if request.method == 'POST':
         filled_form = UploadFileForm(request.POST, request.FILES)
         if filled_form.is_valid():
             note = 'Uploaded'
-            handle_uploaded_file(request.FILES['testFile'])
+            # handle_uploaded_file(request.FILES['testFile'])
             model_instance = filled_form.save()
             model_instance.save()
             new_form = UploadFileForm()
@@ -21,4 +20,11 @@ def index(request):
         return render(request,'index.html', {'uploadform':form})
 
     # form = UploadFileForm()
-    # return render(request,'index.html', {'uploadform':form})   
+    # return render(request,'index.html', {'uploadform':form})
+    # 
+
+def filesList(request):
+    files = testModel.objects.all()
+    return render(request,'files_list.html',{
+        'files':files
+    })   
