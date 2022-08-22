@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <title>Testing</title>
+</head>
+<body>
+    <div>
+        <h3>{{ note }}</h3>
+        <form enctype="multipart/form-data" action="{% url 'import' %}" method="post">
+            {% csrf_token %}  
+            
+            <input type="file" name="myfile">
+            <input id="submit" type="submit" value="Submit">
+        </form>
+    </div>
+    <!-- <br><br>
+    <a href="{{ MEDIA_URL }}{{ filepath }}" target="_blank">{{ filename }}</a>
+    <br><br>
+    </p> -->
+</body>
+</html>

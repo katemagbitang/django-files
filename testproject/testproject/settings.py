@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     
     # my applications 
     'testapp_1',
+    'import_export'
 ]
 
 MIDDLEWARE = [
