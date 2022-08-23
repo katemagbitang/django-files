@@ -28,7 +28,7 @@ def index(request):
     
 
 def filesList(request):
-    files = testModel.objects.all()
+    files = fileRead.objects.all()
     return render(request,'files_list.html',{
         'files':files
     })   

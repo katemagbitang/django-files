@@ -1,9 +1,58 @@
 {% load static %}
 {% block content %}
+<style>
+    table, th, td {
+      border:1px solid black;
+    }
+    </style>
 <div>
-    {% for files in files %}
-        <p>Requestor: {{ file.requestor }}</p>
-        <p>File Path: {{ file.testFile.url }}</p><br>
-    {% endfor %}
+    <table style="width:100%">
+        <tr>
+            <th>Requestor Name</th>
+            <th>Requestor Email</th>
+            <th>Requestor T#</th>
+            <th>Business Unit</th>
+            <th>Plant Code & Name</th>
+            <th>Request Name</th>
+            <th>Project Manager</th>
+            <th>SAP Code</th>
+            <th>User defined ID</th>
+            <th>Is this part high priority for triggering or stocking?</th>
+            <th>English material description (40 characters)</th>
+            <th>Base unit of measure</th>
+            <th>Material group pick list</th>
+            <th>Manufacturer name</th>
+            <th>Part number or DRW number</th>
+            <th>Attachment</th>
+            <th>I do not have any type of documentation and I accept that my part processing will take more time</th>
+            <th>IBAU (s) #</th>
+            <th>IBAU Name</th>
+            <th>Functional location (s) multiple</th>
+        </tr>
+        {% for file in files %}
+        <tr>
+            <td>{{ file.requestorName }}</td>
+            <td>{{ file.requestorEmail }}</td>
+            <td>{{ file.requestorTNum }}</td>
+            <td>{{ file.businessUnit }}</td>
+            <td>{{ file.plantCode }}</td>
+            <td>{{ file.requestName }}</td>
+            <td>{{ file.projectManager }}</td>
+            <td>{{ file.sapCode }}</td>
+            <td>{{ file.userID }}</td>
+            <td>{{ file.isHighPriority }}</td>
+            <td>{{ file.materialDescription }}</td>
+            <td>{{ file.unitOfMeasurement }}</td>
+            <td>{{ file.materialGroup }}</td>
+            <td>{{ file.manufacturerName }}</td>
+            <td>{{ file.materialPartNumber }}</td>
+            <td>{{ file.attachment }}</td>
+            <td>{{ file.isDocumented }}</td>
+            <td>{{ file.ibauNum }}</td>
+            <td>{{ file.ibauName }}</td>
+            <td>{{ file.functionalLocations }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </div>
 {% endblock %}
