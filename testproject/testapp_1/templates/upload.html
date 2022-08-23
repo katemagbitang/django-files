@@ -2,10 +2,9 @@
 {% block content %}
 <div>
     <h3>{{ note }}</h3>
-    <form enctype="multipart/form-data" action="{% url 'import' %}" method="post">
+    <form enctype="multipart/form-data" action="{% url 'upload' %}" method="post">
         {% csrf_token %}  
-            
-        <input type="file" name="myfile">
+        {{ uploadform }}
         <input id="submit" type="submit" value="Submit">
     </form>
 </div>

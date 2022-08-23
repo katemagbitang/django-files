@@ -4,14 +4,22 @@
     <title>Testing</title>
 </head>
 <body>
-    <div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/upload">Upload</a>
+        <a href="/import">Import Data</a>
+        <a href="/files">Imported Data</a>
+    </nav>
+    {% block content %}
+    {% endblock %}
+    <!-- <div>
         <h3>{{ note }}</h3>
         <form enctype="multipart/form-data" action="{% url 'index' %}" method="post">
             {% csrf_token %}  
             {{ uploadform }}
             <input id="submit" type="submit" value="Submit">
         </form>
-    </div>
+    </div> -->
     <!-- <br><br>
     <a href="{{ MEDIA_URL }}{{ filepath }}" target="_blank">{{ filename }}</a>
     <br><br>

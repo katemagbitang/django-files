@@ -7,8 +7,11 @@ from .resources import FileReadResource
 from django.contrib import messages
 from tablib import Dataset
 
-# uploading to local directory
 def index(request):
+    return render(request,'index.html')
+
+# uploading to local directory
+def upload(request):
     if request.method == 'POST':
         filled_form = UploadFileForm(request.POST, request.FILES)
         if filled_form.is_valid():
@@ -17,14 +20,14 @@ def index(request):
             model_instance = filled_form.save()
             model_instance.save()
             new_form = UploadFileForm()
-            return render(request,'index.html', {'uploadform':new_form, 'note':note})
+            return render(request,'upload.html', {'uploadform':new_form, 'note':note})
             # return render(request,'index.html', {'uploadform':form})       
     else:
         form = UploadFileForm()
-        return render(request,'index.html', {'uploadform':form})
+        return render(request,'upload.html', {'uploadform':form})
 
-    form = UploadFileForm()
-    return render(request,'index.html', {'uploadform':form})
+    # form = UploadFileForm()
+    # return render(request,'index.html', {'uploadform':form})
     
 
 def filesList(request):

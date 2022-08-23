@@ -23,6 +23,7 @@ from testapp_1 import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
+    path('upload/',views.upload, name="upload"),
     path('files/', views.filesList, name="files"),
     path('import/', views.importFile, name="import"),
 ]
