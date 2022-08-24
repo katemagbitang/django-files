@@ -5,7 +5,7 @@ from .models import fileRead, testModel
 from .forms import UploadFileForm
 from .resources import FileReadResource
 from tablib import Dataset
-from .functions import validateEmail, validateBusinessUnit, readBusinessUnit, validatePlant
+from .functions import validateEmail, validateBusinessUnit, validatePlant, checkEmptyFields
 
 def index(request):
     return render(request,'index.html')
@@ -59,19 +59,33 @@ def importFile(request):
         #     value.save()
         for data in imported_data:
 
+            mandatory_fields = [data[4],data[5],data[6],data[11],data[12],data[13],data[14],data[15],data[16],data[20]]
+            
+            # check if the mandatory fields are empty to be replaced with another string
+            isFilledBU = checkEmptyFields(data[4])
+            isFilledPlant = checkEmptyFields(data[5])
+            isFilledReqName = checkEmptyFields(data[6])
+            isFilledMatDes = checkEmptyFields(data[11])
+            isFilledUnitMeasure = checkEmptyFields(data[12])
+            isFilledMatGroup = checkEmptyFields(data[13])
+            isFilledManuName = checkEmptyFields(data[14])
+            isFilledPartNum = checkEmptyFields(data[15])
+            isFilledAttach = checkEmptyFields(data[16])
+            isFilledLocation = checkEmptyFields(data[20])
+            
             # checks if the email is valid
             validatedEmail = validateEmail(data[2])
             # print(validatedEmail)
 
             # checks if the business unit is part of P&G
-            validatedBU = validateBusinessUnit(data[4])
+            validatedBU = validateBusinessUnit(isFilledBU)
             # print(validatedBU)
 
             # checks if the plant code and name is part of P&G
-            validatedPlant = validatePlant(data[5])
+            validatedPlant = validatePlant(isFilledPlant)
             # print(validatedPlant)
-           
-            value = fileRead(data[0],data[1],validatedEmail,data[3],validatedBU,validatedPlant,data[6],data[7],data[8],data[9],data[10],
+        
+            value = fileRead(data[0],data[1],validatedEmail,data[3],validatedBU,validatedPlant,isFilledReqName,data[7],data[8],data[9],data[10],
                                 data[11],data[12],data[13],data[14],data[15],data[16],data[17],data[18],data[19],data[20])
             value.save()
         return render(request, 'import.html',{'note':'Imported'})

@@ -18,6 +18,7 @@ def validateEmail(email):
 def validateBusinessUnit(businessUnit):
     units = list(map(str.lower,['Baby Care', 'Fabric Care', 'Family Care', 'Feminine Care', 'Hair Care', 'Home Care', 'Oral Care', 'Personal Health Care', 'Shave Care', 'Skin and Personal Cleansing', 'Beauty Care', 'Global Business Services']))
     # print(units)
+    
     businessUnit = str.lower(businessUnit)
     # print(businessUnit)
     for unit in units:
@@ -28,19 +29,6 @@ def validateBusinessUnit(businessUnit):
             unit = 'Unknown'
            
     return unit
-
-# for tracing purposes
-def readBusinessUnit():
-    units = list(map(str.lower,['Baby Care', 'Fabric Care', 'Family Care', 'Feminine Care', 'Hair Care', 'Home Care', 'Oral Care', 'Personal Health Care', 'Shave Care', 'Skin and Personal Cleansing', 'Beauty Care', 'Global Business Services']))
-    # print(units)
-    # businessUnit = str.lower(businessUnit)
-    # print(businessUnit)
-    for unit in units:
-        print(unit)
-        # if businessUnit != unit:
-        #     return 'Unknown Business Unit'
-        # else:
-        #     businessUnit = str.upper(businessUnit)
 
 def validatePlant(plantCode):
     plants = list(map(str.upper,['1702 LIMA-OHIO-PLANT', '1719 GREENSBORO SWING ROAD PLANT',
@@ -70,3 +58,21 @@ def validatePlant(plantCode):
             plant = 'No such plant'
     
     return plant
+
+# temporary; will fill in empty fields
+def checkEmptyFields(field):
+# fields that are mandatory:
+# businessUnit data[4]
+# plantCode data[5]
+# requestName data[6]
+# materialDescription data[11]
+# unitOfMeasurement data[12]
+# materialGroup data[13]
+# manufacturerName data[14]
+# materialPartNumber data[15]
+# attachment data[16]
+# functionalLocations data[20]
+    if field == None:
+        field = 'To be filled manually'
+    return field
+
