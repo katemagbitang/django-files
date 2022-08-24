@@ -16,15 +16,15 @@ def validateEmail(email):
 
 # checks if the business unit is part of P&G
 def validateBusinessUnit(businessUnit):
-    units = list(map(str.lower,['Baby Care', 'Fabric Care', 'Family Care', 'Feminine Care', 'Hair Care', 'Home Care', 'Oral Care', 'Personal Health Care', 'Shave Care', 'Skin and Personal Cleansing', 'Beauty Care', 'Global Business Services']))
+    units = list(map(str.title,['Baby Care', 'Fabric Care', 'Family Care', 'Feminine Care', 'Hair Care', 'Home Care', 'Oral Care', 'Personal Health Care', 'Shave Care', 'Skin and Personal Cleansing', 'Beauty Care', 'Global Business Services']))
     # print(units)
     
-    businessUnit = str.lower(businessUnit)
+    businessUnit = str.title(businessUnit)
     # print(businessUnit)
     for unit in units:
         # print(unit)
         if businessUnit == unit:
-            return str.title(unit)
+            return unit
         else:
             unit = 'Unknown'
            
@@ -76,3 +76,26 @@ def checkEmptyFields(field):
         field = 'To be filled manually'
     return field
 
+def validateMeasureUnit(unitOfMeasurement):
+    units = list(map(str.title,['EA (Each)', 'KG (Kilogram)',
+                                'L (Liter)', 'M (Meter)','M2 (Square Meter)',
+                                'PR (Pair)']))
+
+    unitOfMeasurement = str.title(unitOfMeasurement)
+    for unit in units:
+        # when the field only has the plant code on the excel
+        if len(unitOfMeasurement) < 3:
+            for unit in units:
+                x = unit.split(' ',1)
+                # print(x)
+                if x[0] == unitOfMeasurement:
+                    return unit
+                else:
+                    unit = 'No such unit'
+        # elif if the field only placed the plant name to follow if needed           
+        elif unitOfMeasurement == unit:
+            return unit
+        else:
+            unit = 'No such unit'
+    
+    return unit
