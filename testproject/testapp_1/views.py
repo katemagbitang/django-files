@@ -4,8 +4,8 @@ from django.shortcuts import render
 from .models import fileRead, testModel
 from .forms import UploadFileForm
 from .resources import FileReadResource
-from django.contrib import messages
 from tablib import Dataset
+from .functions import validateEmail
 
 def index(request):
     return render(request,'index.html')
@@ -48,8 +48,17 @@ def importFile(request):
             return render(request,'import.html',{'note':'Wrong File Format'})
 
         imported_data = dataset.load(new_file.read(),format='xlsx')
+        # for data in imported_data:
+        #     value = fileRead(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7],data[8],data[9],data[10],
+        #                         data[11],data[12],data[13],data[14],data[15],data[16],data[17],data[18],data[19],data[20])
+        #     value.save()
         for data in imported_data:
-            value = fileRead(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7],data[8],data[9],data[10],
+
+            print(data[2])
+            validatedEmail = validateEmail(data[2])
+            print(validatedEmail)
+
+            value = fileRead(data[0],data[1],validatedEmail,data[3],data[4],data[5],data[6],data[7],data[8],data[9],data[10],
                                 data[11],data[12],data[13],data[14],data[15],data[16],data[17],data[18],data[19],data[20])
             value.save()
         return render(request, 'import.html',{'note':'Imported'})
