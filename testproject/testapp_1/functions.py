@@ -83,7 +83,7 @@ def validateMeasureUnit(unitOfMeasurement):
 
     unitOfMeasurement = str.title(unitOfMeasurement)
     for unit in units:
-        # when the field only has the plant code on the excel
+        # when the field only has the acronym of the unit on the excel
         if len(unitOfMeasurement) < 3:
             for unit in units:
                 x = unit.split(' ',1)
@@ -99,3 +99,27 @@ def validateMeasureUnit(unitOfMeasurement):
             unit = 'No such unit'
     
     return unit
+
+def validateMaterialGrp(materiaGroup):
+    groups = list(map(str.title,['OEM-G40150000', 'Commercial-G310000AA',
+                                'Fabricated-G31000000']))
+
+    materiaGroup = str.title(materiaGroup)
+    for group in groups:
+        # when the field only has the 9-digits OR the group name on the excel
+        if len(materiaGroup) < 10:
+            for group in groups:
+                x = group.split('-',1)
+                # print(x)
+                if x[1] == materiaGroup:
+                    return group
+                elif x[0] == materiaGroup: # not working: getting name
+                    return group
+                else:
+                    group = 'No such group'
+        elif materiaGroup == group:
+            return group
+        else:
+            group = 'No such group'
+    
+    return group

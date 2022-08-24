@@ -5,7 +5,7 @@ from .models import fileRead, testModel
 from .forms import UploadFileForm
 from .resources import FileReadResource
 from tablib import Dataset
-from .functions import validateEmail, validateBusinessUnit, validatePlant, checkEmptyFields, validateMeasureUnit
+from .functions import validateEmail, validateBusinessUnit, validatePlant, checkEmptyFields, validateMeasureUnit, validateMaterialGrp
 
 def index(request):
     return render(request,'index.html')
@@ -85,12 +85,15 @@ def importFile(request):
             validatedPlant = validatePlant(isFilledPlant)
             # print(validatedPlant)
 
-            # checks if the plant code and name is part of P&G
+            # checks if the unit of measurement is valid
             validatedMeasureUnit = validateMeasureUnit(isFilledMeasureUnit)
             # print(validatedPlant)
+
+            # checks if the material group is valid
+            validatedMatGrp = validateMaterialGrp(isFilledMatGroup);
         
             value = fileRead(data[0],data[1],validatedEmail,data[3],validatedBU,validatedPlant,isFilledReqName,data[7],data[8],data[9],data[10],
-                                isFilledMatDes,validatedMeasureUnit,data[13],isFilledManuName,isFilledPartNum,isFilledAttach,data[17],data[18],data[19],isFilledLocation)
+                                isFilledMatDes,validatedMeasureUnit,validatedMatGrp,isFilledManuName,isFilledPartNum,isFilledAttach,data[17],data[18],data[19],isFilledLocation)
             value.save()
         return render(request, 'import.html',{'note':'Imported'})
     else:
