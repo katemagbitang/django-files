@@ -26,6 +26,7 @@ urlpatterns = [
     path('upload/',views.upload, name="upload"),
     path('files/', views.filesList, name="files"),
     path('import/', views.importFile, name="import"),
+    path('partOneImport/', views.partOneImportFile, name="partOneImport"),
 ]
 
 if settings.DEBUG:

@@ -1,9 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .models import fileRead, testModel
+from .models import fileRead, testModel, partOneImport
 from .forms import UploadFileForm
-from .resources import FileReadResource
+from .resources import FileReadResource, PartOneReadResource
 from tablib import Dataset
 from .functions import validateEmail, validateBusinessUnit, validatePlant, checkEmptyFields, validateMeasureUnit, validateMaterialGrp
 
@@ -98,3 +98,27 @@ def importFile(request):
         return render(request, 'import.html',{'note':'Imported'})
     else:
         return render(request, 'import.html')
+
+def partOneImportFile(request):
+    if request.method == 'POST':
+        file_resource = PartOneReadResource()
+        dataset = Dataset()
+        new_file = request.FILES['myfiletwo']
+
+        if not new_file.name.endswith('xlsx'):
+            # messages.info(request,'Wrong File Format')
+            return render(request,'partOneImport.html',{'note':'Wrong File Format'})
+
+        # for tracing purposes
+        # readBusinessUnit()
+
+        imported_data = dataset.load(new_file.read(),format='xlsx')
+        # intial loop
+        for data in imported_data:
+            value = partOneImport(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7],data[8],data[9],data[10],
+                                data[11],data[12],data[13],data[14],data[15],data[16],data[17],data[18])
+            value.save()
+        
+        return render(request, 'partOneImport.html',{'note':'Imported'})
+    else:
+        return render(request, 'partOneImport.html')

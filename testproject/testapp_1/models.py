@@ -31,3 +31,23 @@ class fileRead(models.Model):
     ibauNum = models.CharField(max_length=30, null=True)
     ibauName = models.CharField(max_length=100, null=True)
     functionalLocations = models.CharField(max_length=30, null=False)
+
+class partOneImport(models.Model):
+    userID = models.CharField(max_length=100, null=True)
+    isHighPriority = models.BooleanField(default=False)
+    materialDescription = models.CharField(max_length=40, null=False)
+    unitOfMeasurement = models.CharField(max_length=5, null=False) # picklist
+    materialGroup = models.CharField(max_length=100, null=False) # picklist
+    manufacturerName = models.CharField(max_length=100, null=False)
+    materialPartNumber = models.CharField(max_length=100, null=False)
+    attachment = models.CharField(max_length=100, null=False) # replace to file field once model is established
+    isDocumented = models.BooleanField(default=False)
+    ibauNum = models.CharField(max_length=30, null=True)
+    ibauName = models.CharField(max_length=100, null=True)
+    functionalLocations = models.CharField(max_length=30, null=False)
+    vendorName = models.CharField(max_length=30, null=True)
+    vendorPartNum = models.CharField(max_length=30, null=True)
+    vendorPartNumRevision = models.CharField(max_length=2, null=True)
+    technicalContact = models.CharField(max_length=30, null=True)
+    security = models.CharField(max_length=30, null=False)
+    tcProjectId = models.CharField(max_length=30, null=True)

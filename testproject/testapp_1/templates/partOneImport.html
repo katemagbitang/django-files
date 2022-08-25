@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+{% block content %}
+<div>
+    <h3>{{ note }}</h3>
+    <form enctype="multipart/form-data" action="{% url 'partOneImport' %}" method="post">
+        {% csrf_token %}  
+            
+        <input type="file" name="myfiletwo">
+        <input id="submit" type="submit" value="Submit">
+    </form>
+</div>
+{% endblock %}
