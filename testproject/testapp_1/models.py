@@ -34,7 +34,7 @@ class fileRead(models.Model):
 
 class partOneImport(models.Model):
     userID = models.CharField(max_length=100, null=True)
-    isHighPriority = models.BooleanField(default=False)
+    isHighPriority = models.CharField(max_length=5, null=False, default='No')
     materialDescription = models.CharField(max_length=40, null=False)
     unitOfMeasurement = models.CharField(max_length=5, null=False) # picklist
     materialGroup = models.CharField(max_length=100, null=False) # picklist
@@ -49,5 +49,5 @@ class partOneImport(models.Model):
     vendorPartNum = models.CharField(max_length=30, null=True)
     vendorPartNumRevision = models.CharField(max_length=2, null=True)
     technicalContact = models.CharField(max_length=30, null=True)
-    security = models.CharField(max_length=30, null=False)
+    security = models.CharField(max_length=20, null=False, default='Internal Use')
     tcProjectId = models.CharField(max_length=30, null=True)
