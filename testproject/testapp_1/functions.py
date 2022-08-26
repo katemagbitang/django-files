@@ -123,3 +123,14 @@ def validateMaterialGrp(materiaGroup):
             group = 'No such group'
     
     return group
+
+def validateSecurity(securityClassification):
+    types = list(map(str.title,['Internal Use', 'Restricted']))
+
+    securityClassification = str.title(securityClassification)
+    for type in types:
+        if securityClassification == type:
+            return type
+        else:
+            type = 'No such classification'
+    return type
