@@ -8,14 +8,6 @@
 <div>
     <table style="width:100%">
         <tr>
-            <th>Requestor Name</th>
-            <th>Requestor Email</th>
-            <th>Requestor T#</th>
-            <th>Business Unit</th>
-            <th>Plant Code & Name</th>
-            <th>Request Name</th>
-            <th>Project Manager</th>
-            <th>SAP Code</th>
             <th>User defined ID</th>
             <th>Is this part high priority for triggering or stocking?</th>
             <th>English material description (40 characters)</th>
@@ -28,17 +20,15 @@
             <th>IBAU (s) #</th>
             <th>IBAU Name</th>
             <th>Functional location (s) multiple</th>
+            <th>Vendor Name</th>
+            <th>Vendor Part Number</th>
+            <th>Vendor Part Number Revision</th>
+            <th>Technical Contact</th>
+            <th>Security Classification</th>
+            <th>TC Project ID</th>
         </tr>
         {% for file in files %}
         <tr>
-            <td>{{ file.requestorName }}</td>
-            <td>{{ file.requestorEmail }}</td>
-            <td>{{ file.requestorTNum }}</td>
-            <td>{{ file.businessUnit }}</td>
-            <td>{{ file.plantCode }}</td>
-            <td>{{ file.requestName }}</td>
-            <td>{{ file.projectManager }}</td>
-            <td>{{ file.sapCode }}</td>
             <td>{{ file.userID }}</td>
             <td>{{ file.isHighPriority }}</td>
             <td>{{ file.materialDescription }}</td>
@@ -51,6 +41,12 @@
             <td>{{ file.ibauNum }}</td>
             <td>{{ file.ibauName }}</td>
             <td>{{ file.functionalLocations }}</td>
+            <td>{{ file.vendorName }}</td>
+            <td>{{ file.vendorPartNum }}</td>
+            <td>{{ file.vendorPartNumRevision }}</td>
+            <td>{{ file.technicalContact }}</td>
+            <td>{{ file.security }}</td>
+            <td>{{ file.tcProjectId }}</td>
         </tr>
         {% endfor %}
     </table>

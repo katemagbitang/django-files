@@ -32,8 +32,8 @@ def upload(request):
     
 
 def filesList(request):
-    files = fileRead.objects.all()
-    return render(request,'files_list.html',{
+    files = partOneImport.objects.all()
+    return render(request,'filesList.html',{
         'files':files
     })   
 
