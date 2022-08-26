@@ -101,10 +101,10 @@ def validateMeasureUnit(unitOfMeasurement):
     return unit
 
 def validateMaterialGrp(materiaGroup):
-    groups = list(map(str.title,['OEM-G40150000', 'Commercial-G310000AA',
+    groups = list(map(str.upper,['OEM-G40150000', 'Commercial-G310000AA',
                                 'Fabricated-G31000000']))
 
-    materiaGroup = str.title(materiaGroup)
+    materiaGroup = str.upper(materiaGroup)
     for group in groups:
         # when the field only has the 9-digits OR the group name on the excel
         if len(materiaGroup) < 10:
