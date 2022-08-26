@@ -59,23 +59,6 @@ def validatePlant(plantCode):
     
     return plant
 
-# temporary; will fill in empty fields
-def checkEmptyFields(field):
-# fields that are mandatory:
-# businessUnit data[4]
-# plantCode data[5]
-# requestName data[6]
-# materialDescription data[11]
-# unitOfMeasurement data[12]
-# materialGroup data[13]
-# manufacturerName data[14]
-# materialPartNumber data[15]
-# attachment data[16]
-# functionalLocations data[20]
-    if field == None:
-        field = 'To be filled manually'
-    return field
-
 def validateMeasureUnit(unitOfMeasurement):
     units = list(map(str.title,['EA (Each)', 'KG (Kilogram)',
                                 'L (Liter)', 'M (Meter)','M2 (Square Meter)',
@@ -135,7 +118,8 @@ def validateSecurity(securityClassification):
             type = 'No such classification'
     return type
 
-
+# checks if fields are empty
+# returns True if no empty field was detected
 def checkForEmptyFields(data,entries):
     i = 1
     while i != entries:
@@ -143,3 +127,19 @@ def checkForEmptyFields(data,entries):
             return False
         i += 1
     return True
+
+# replaces empty field with another string
+# returns new string
+def replaceEmptyFields(data,entries):
+    newEntries = []
+    i = 1
+    newEntries.append(data[0])
+    while i != entries:
+        if data[i] == None:
+            newEntries.append('Replaced string')
+            print(newEntries[i])
+        else:
+            newEntries.append(data[i])
+        
+        i += 1
+    return newEntries

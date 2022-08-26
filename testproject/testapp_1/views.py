@@ -6,7 +6,7 @@ from .models import fileRead, testModel, partOneImport
 from .forms import UploadFileForm
 from .resources import FileReadResource, PartOneReadResource
 from tablib import Dataset
-from .functions import validateEmail, validateBusinessUnit, validatePlant, checkEmptyFields, validateMeasureUnit, validateMaterialGrp, validateSecurity, checkForEmptyFields
+from .functions import validateEmail, validateBusinessUnit, validatePlant, replaceEmptyFields, validateMeasureUnit, validateMaterialGrp, validateSecurity, checkForEmptyFields
 
 def index(request):
     return render(request,'index.html')
@@ -63,16 +63,16 @@ def importFile(request):
             mandatory_fields = [data[4],data[5],data[6],data[11],data[12],data[13],data[14],data[15],data[16],data[20]]
             
             # check if the mandatory fields are empty to be replaced with another string
-            isFilledBU = checkEmptyFields(data[4])
-            isFilledPlant = checkEmptyFields(data[5])
-            isFilledReqName = checkEmptyFields(data[6])
-            isFilledMatDes = checkEmptyFields(data[11])
-            isFilledMeasureUnit = checkEmptyFields(data[12])
-            isFilledMatGroup = checkEmptyFields(data[13])
-            isFilledManuName = checkEmptyFields(data[14])
-            isFilledPartNum = checkEmptyFields(data[15])
-            isFilledAttach = checkEmptyFields(data[16]) # url or file path soon
-            isFilledLocation = checkEmptyFields(data[20])
+            isFilledBU = replaceEmptyFields(data[4])
+            isFilledPlant = replaceEmptyFields(data[5])
+            isFilledReqName = replaceEmptyFields(data[6])
+            isFilledMatDes = replaceEmptyFields(data[11])
+            isFilledMeasureUnit = replaceEmptyFields(data[12])
+            isFilledMatGroup = replaceEmptyFields(data[13])
+            isFilledManuName = replaceEmptyFields(data[14])
+            isFilledPartNum = replaceEmptyFields(data[15])
+            isFilledAttach = replaceEmptyFields(data[16]) # url or file path soon
+            isFilledLocation = replaceEmptyFields(data[20])
             
             # checks if the email is valid
             validatedEmail = validateEmail(data[2])
@@ -122,14 +122,14 @@ def partOneImportFile(request):
             if (isComplete):
 
 
-            # isFilledMatDes = checkEmptyFields(data[3])
-            # isFilledMeasureUnit = checkEmptyFields(data[4])
-            # isFilledMatGroup = checkEmptyFields(data[5])
-            # isFilledManuName = checkEmptyFields(data[6])
-            # isFilledPartNum = checkEmptyFields(data[7])
-            # isFilledAttach = checkEmptyFields(data[8]) # url or file path soon
-            # isFilledLocation = checkEmptyFields(data[12])
-            # isFilledSecurity = checkEmptyFields(data[17])
+            # isFilledMatDes = replaceEmptyFields(data[3])
+            # isFilledMeasureUnit = replaceEmptyFields(data[4])
+            # isFilledMatGroup = replaceEmptyFields(data[5])
+            # isFilledManuName = replaceEmptyFields(data[6])
+            # isFilledPartNum = replaceEmptyFields(data[7])
+            # isFilledAttach = replaceEmptyFields(data[8]) # url or file path soon
+            # isFilledLocation = replaceEmptyFields(data[12])
+            # isFilledSecurity = replaceEmptyFields(data[17])
 
             # checks if the unit of measurement is valid
             # validatedMeasureUnit = validateMeasureUnit(isFilledMeasureUnit)
@@ -149,7 +149,15 @@ def partOneImportFile(request):
 
                 value.save()
             else:
-                return render(request,'partOneImport.html',{'note':'Incomplete fields'})
+                newValues = []
+                newValues = replaceEmptyFields(data,len(data))
+
+                value = partOneImport(data[0],newValues[1],newValues[2],newValues[3],newValues[4],newValues[5],newValues[6],newValues[7],newValues[8],newValues[9],newValues[10],
+                                newValues[11],newValues[12],newValues[13],newValues[14],newValues[15],newValues[16],newValues[17],newValues[18])
+
+                value.save()
+
+                return render(request,'partOneImport.html',{'note':'Replaced fields'})
         
         return render(request, 'partOneImport.html',{'note':'Imported'})
     else:
