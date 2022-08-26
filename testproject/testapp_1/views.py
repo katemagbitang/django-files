@@ -6,7 +6,7 @@ from .models import fileRead, testModel, partOneImport
 from .forms import UploadFileForm
 from .resources import FileReadResource, PartOneReadResource
 from tablib import Dataset
-from .functions import validateEmail, validateBusinessUnit, validatePlant, checkEmptyFields, validateMeasureUnit, validateMaterialGrp, validateSecurity
+from .functions import validateEmail, validateBusinessUnit, validatePlant, checkEmptyFields, validateMeasureUnit, validateMaterialGrp, validateSecurity, checkForEmptyFields
 
 def index(request):
     return render(request,'index.html')
@@ -117,28 +117,39 @@ def partOneImportFile(request):
         # intial loop
         for data in imported_data:
 
-            isFilledMatDes = checkEmptyFields(data[3])
-            isFilledMeasureUnit = checkEmptyFields(data[4])
-            isFilledMatGroup = checkEmptyFields(data[5])
-            isFilledManuName = checkEmptyFields(data[6])
-            isFilledPartNum = checkEmptyFields(data[7])
-            isFilledAttach = checkEmptyFields(data[8]) # url or file path soon
-            isFilledLocation = checkEmptyFields(data[12])
-            isFilledSecurity = checkEmptyFields(data[17])
+            isComplete = checkForEmptyFields(data,len(data))
+
+            if (isComplete):
+
+
+            # isFilledMatDes = checkEmptyFields(data[3])
+            # isFilledMeasureUnit = checkEmptyFields(data[4])
+            # isFilledMatGroup = checkEmptyFields(data[5])
+            # isFilledManuName = checkEmptyFields(data[6])
+            # isFilledPartNum = checkEmptyFields(data[7])
+            # isFilledAttach = checkEmptyFields(data[8]) # url or file path soon
+            # isFilledLocation = checkEmptyFields(data[12])
+            # isFilledSecurity = checkEmptyFields(data[17])
 
             # checks if the unit of measurement is valid
-            validatedMeasureUnit = validateMeasureUnit(isFilledMeasureUnit)
+            # validatedMeasureUnit = validateMeasureUnit(isFilledMeasureUnit)
             # print(validatedPlant)
 
             # checks if the material group is valid
-            validatedMatGrp = validateMaterialGrp(isFilledMatGroup)
+            # validatedMatGrp = validateMaterialGrp(isFilledMatGroup)
 
             #checks if the security classification is valid
-            validatedSecurity = validateSecurity(isFilledSecurity)
+            # validatedSecurity = validateSecurity(isFilledSecurity)
 
-            value = partOneImport(data[0],data[1],data[2],isFilledMatDes,validatedMeasureUnit,validatedMatGrp,isFilledManuName,isFilledPartNum,isFilledAttach,data[9],data[10],
-                                data[11],isFilledLocation,data[13],data[14],data[15],data[16],validatedSecurity,data[18])
-            value.save()
+            # value = partOneImport(data[0],data[1],data[2],isFilledMatDes,validatedMeasureUnit,validatedMatGrp,isFilledManuName,isFilledPartNum,isFilledAttach,data[9],data[10],
+            #                     data[11],isFilledLocation,data[13],data[14],data[15],data[16],validatedSecurity,data[18])
+
+                value = partOneImport(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7],data[8],data[9],data[10],
+                                data[11],data[12],data[13],data[14],data[15],data[16],data[17],data[18])
+
+                value.save()
+            else:
+                return render(request,'partOneImport.html',{'note':'Incomplete fields'})
         
         return render(request, 'partOneImport.html',{'note':'Imported'})
     else:

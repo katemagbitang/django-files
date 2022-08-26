@@ -134,3 +134,12 @@ def validateSecurity(securityClassification):
         else:
             type = 'No such classification'
     return type
+
+
+def checkForEmptyFields(data,entries):
+    i = 1
+    while i != entries:
+        if data[i] == None:
+            return False
+        i += 1
+    return True
