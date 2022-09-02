@@ -71,7 +71,7 @@ The following fields are **required** to have an input under the field:
 
 For more information about the fields, kindly check the **Data Dictionary - Request** on Confluence.
 
-Once an Excel file has been imported, the data placed on the second row of the Excel file will reflect on the table.
+Once an Excel file has been imported, the data placed on the second row of the Excel file will be appended on the table on `Imported Data`.
 
 ## Admin
 Admin documentation is to be followed.
