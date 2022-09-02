@@ -141,20 +141,20 @@ def partOneImportFile(request):
             else:
                 # replace strings function
                 #
-                # newValues = []
-                # newValues = replaceEmptyFields(data,len(data))
+                newValues = []
+                newValues = replaceEmptyFields(data,len(data))
 
-                # value = partOneImport(data[0],newValues[1],newValues[2],newValues[3],newValues[4],newValues[5],newValues[6],newValues[7],newValues[8],newValues[9],newValues[10],
-                #                 newValues[11],newValues[12],newValues[13],newValues[14],newValues[15],newValues[16],newValues[17],newValues[18])
+                value = partOneImport(data[0],newValues[1],newValues[2],newValues[3],newValues[4],newValues[5],newValues[6],newValues[7],newValues[8],newValues[9],newValues[10],
+                                newValues[11],newValues[12],newValues[13],newValues[14],newValues[15],newValues[16],newValues[17],newValues[18])
 
-                # value = partOneImport(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7],data[8],data[9],data[10],
-                #                 data[11],data[12],data[13],data[14],data[15],data[16],data[17],data[18])
+                value = partOneImport(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7],data[8],data[9],data[10],
+                                data[11],data[12],data[13],data[14],data[15],data[16],data[17],data[18])
 
-                # value.save()
+                value.save()
 
-                # return render(request,'partOneImport.html',{'note':'Replaced fields'})
+                return render(request,'partOneImport.html',{'note':'Replaced fields'})
 
-                return render(request,'partOneImport.html',{'note':'Incomplete fields'})
+                # return render(request,'partOneImport.html',{'note':'Incomplete fields'})
         
         return render(request, 'partOneImport.html',{'note':'Imported'})
     else:
